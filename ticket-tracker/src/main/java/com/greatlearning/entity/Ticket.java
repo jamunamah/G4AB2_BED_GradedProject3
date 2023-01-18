@@ -48,4 +48,53 @@ public class Ticket {
 	@DateTimeFormat(pattern = "yyyy-MM-dd")
 	private Date updatedDate;
 
+	public int getId() {
+		return id;
+	}
+
+	public void setId(int id) {
+		this.id = id;
+	}
+
+	public String getTicketTitle() {
+		return ticketTitle;
+	}
+
+	public void setTicketTitle(String ticketTitle) {
+		this.ticketTitle = ticketTitle;
+	}
+
+	public String getTicketDescription() {
+		return ticketDescription;
+	}
+
+	public void setTicketDescription(String ticketDescription) {
+		this.ticketDescription = ticketDescription;
+	}
+
+	public String getTicketContent() {
+		return ticketContent;
+	}
+
+	public void setTicketContent(String ticketContent) {
+		this.ticketContent = ticketContent;
+	}
+
+	public Date getDate() {
+		return date;
+	}
+
+	public void setDate(Date date) {
+		this.date = date;
+	}
+
+	public Date getUpdatedDate() {
+		return updatedDate;
+	}
+
+	public void setUpdatedDate(Date updatedDate) {
+		this.updatedDate = updatedDate;
+	}
+
+	
 }

@@ -20,86 +20,55 @@ import com.greatlearning.service.TicketService;
 public class TicketController {
 
 	@Autowired
-	private TicketService ticketService;
+	private TicketService service;
 
-	// add mapping for "/list"
-
-	// getmapping to get the data from the server
+	/**
+	 *  Fetch all tickets from DB
+	 */
 	@GetMapping("/list")
-	public String listTickets(Model theModel) {
-
-		// get tickets from database aka calling service
-		List<Ticket> theTickets = ticketService.getAllTicket();
-
-		// add to the spring model aka setting property
-		theModel.addAttribute("tickets", theTickets);
-
+	public String listTickets(Model model) {
+		List<Ticket> tickets = service.getAllTicket();
+		model.addAttribute("tickets", tickets);
 		return "tickets/list-tickets";
 	}
 
 	@GetMapping("/showFormForAdd")
-	public String showFormForAdd(Model theModel) {
-
-		// create model attribute to bind form data
-		Ticket theTicket = new Ticket();
-
-		theModel.addAttribute("ticket", theTicket);
-
+	public String showFormForAdd(Model model) {
+		Ticket ticket = new Ticket();
+		model.addAttribute("ticket", ticket);
 		return "tickets/ticket-form";
 	}
 
-	// postmapping to post the data to the DB
 	@PostMapping("/showFormForUpdate")
-	public String showFormForUpdate(@RequestParam("ticketId") int theId, Model theModel) {
-
-		// get the book from the service
-		Ticket theTicket = ticketService.findById(theId);
-
-		// set book as a model attribute to pre-populate the form
-		theModel.addAttribute("ticket", theTicket);
-
-		// send over to our form
+	public String showFormForUpdate(@RequestParam("ticketId") int id, Model model) {
+		Ticket ticket = service.findById(id);
+		model.addAttribute("ticket", ticket);
 		return "tickets/ticket-form-update";
 	}
 
 	@PostMapping("/save")
-	public String saveTicket(@ModelAttribute("ticket") Ticket theTicket) {
-
-		// save the book
-		ticketService.addTicket(theTicket);
-
-		// use a redirect to prevent duplicate submissions
+	public String saveTicket(@ModelAttribute("ticket") Ticket ticket) {
+		service.addTicket(ticket);
 		return "redirect:/tickets/list";
 	}
 
 	@PostMapping("/delete")
-	public String delete(@RequestParam("ticketId") int theId) {
-
-		// delete the book
-		ticketService.deleteById(theId);
-
-		// redirect to /books/list , refreshing
+	public String delete(@RequestParam("ticketId") int id) {
+		service.deleteById(id);
 		return "redirect:/tickets/list";
 	}
 
 	@GetMapping("/search")
-	public String search(Model theModel, @Param("keyword") String keyword) {
-
-		// find by keyword
-		List<Ticket> tickets = ticketService.findAllTickets(keyword);
-
-		theModel.addAttribute("tickets", tickets);
-
+	public String search(Model model, @Param("keyword") String keyword) {
+		List<Ticket> tickets = service.findAllTickets(keyword);
+		model.addAttribute("tickets", tickets);
 		return "tickets/list-tickets";
 	}
 
 	@GetMapping("/view")
-	public String listTickets(@RequestParam("ticketId") int theId, Model theModel) {
-
-		Ticket theTicket = ticketService.findById(theId);
-
-		theModel.addAttribute("ticket", theTicket);
-
+	public String listTickets(@RequestParam("ticketId") int id, Model model) {
+		Ticket ticket = service.findById(id);
+		model.addAttribute("ticket", ticket);
 		return "tickets/index";
 	}
 

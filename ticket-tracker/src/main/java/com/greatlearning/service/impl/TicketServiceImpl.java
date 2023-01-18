@@ -1,4 +1,4 @@
-package com.greatlearning.serviceImpl;
+package com.greatlearning.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -14,44 +14,37 @@ import com.greatlearning.service.TicketService;
 public class TicketServiceImpl implements TicketService {
 
 	@Autowired
-	TicketRepository ticketRepository;
+	TicketRepository repository;
 
 	@Override
 	public List<Ticket> getAllTicket() {
-		return ticketRepository.findAll();
+		return repository.findAll();
 	}
 
 	@Override
 	public Ticket addTicket(Ticket ticket) {
-		return ticketRepository.saveAndFlush(ticket);
+		return repository.saveAndFlush(ticket);
 	}
 
 	@Override
-	public Ticket findById(int theId) {
-		Optional<Ticket> result = ticketRepository.findById(theId);
-
-		Ticket theTicket = null;
-
+	public Ticket findById(int id) {
+		Optional<Ticket> result = repository.findById(id);
 		if (result.isPresent()) {
-			theTicket = result.get();
-		} else
-			try {
-				throw new RuntimeException("Did not find book id - " + theId);
-			} catch (Exception e) {
-			}
-		return theTicket;
+			return result.get();
+		}
+		throw new RuntimeException("Ticket not found for id: " + id);
 	}
 
 	@Override
-	public void deleteById(int theId) {
-		ticketRepository.deleteById(theId);
+	public void deleteById(int id) {
+		repository.deleteById(id);
 	}
 
 	@Override
 	public List<Ticket> findAllTickets(String keyword) {
 		if (keyword != null) {
-			return ticketRepository.search(keyword);
+			return repository.search(keyword);
 		}
-		return ticketRepository.findAll();
+		return repository.findAll();
 	}
 }

@@ -2,18 +2,15 @@
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 
 <head>
-<!-- Required meta tags -->
-<meta charset="utf-8">
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<!-- Required meta tags -->
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-<!-- Bootstrap CSS -->
-<link rel="stylesheet"
-	href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
-	integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS"
-	crossorigin="anonymous">
+	<!-- Bootstrap CSS -->
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.2.1/css/bootstrap.min.css"
+		integrity="sha384-GJzZqFGwb1QTTN6wy59ffF1BuGJpLSa9DkKMp0DgiMDm4iYMj70gZWKYbI706tWS" crossorigin="anonymous">
 
-<title>Ticket Tracker Application</title>
+	<title>Ticket Tracker Application</title>
 </head>
 
 <body>
@@ -22,21 +19,20 @@
 		<a class="navbar-brand" href="#">Ticket Tracker Application</a>
 
 		<!-- Toggler/collapsibe Button -->
-		<button class="navbar-toggler" type="button" data-toggle="collapse"
-			data-target="#collapsibleNavbar">
+		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
 			<span class="navbar-toggler-icon"></span>
 		</button>
-		
-<!-- Navbar links -->
-  <div class="collapse navbar-collapse" id="collapsibleNavbar">
-    <ul class="navbar-nav">
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/tickets/list}">Tickets</a>
-      </li>
-    </ul>
-  </div>
-</nav>
-<br>
+
+		<!-- Navbar links -->
+		<div class="collapse navbar-collapse" id="collapsibleNavbar">
+			<ul class="navbar-nav">
+				<li class="nav-item">
+					<a class="nav-link" th:href="@{/tickets/list}">Tickets</a>
+				</li>
+			</ul>
+		</div>
+	</nav>
+	<br>
 
 
 	<div class="container">
@@ -45,14 +41,13 @@
 		<hr>
 
 		<!-- Add a button -->
-		<a th:href="@{/tickets/showFormForAdd}"
-			class="btn btn-primary btn-sm mb-3"> 
-			Add Ticket 
+		<a th:href="@{/tickets/showFormForAdd}" class="btn btn-primary btn-sm mb-3">
+			Add Ticket
 		</a>
 
 		<form th:action="@{/tickets/search}" method="get">
-			<input type="text" name="keyword" th:value="${keyword}"
-				placeholder="Search by Title & Description" size="50">
+			<input type="search" name="keyword" th:value="${keyword}" placeholder="Search by Title & Description"
+				size="50">
 			<button type="submit" class="btn btn-secondary">Search</button>
 		</form>
 
@@ -72,7 +67,7 @@
 
 					<td th:text="${tempTicket.id}"></td>
 					<td th:text="${tempTicket.ticketTitle}"></td>
-					<td th:text="${tempTicket.ticketDescription}"></td>					
+					<td th:text="${tempTicket.ticketDescription}"></td>
 					<td th:text="${#dates.format(tempTicket.date, 'yyyy-MM-dd')}"></td>
 
 					<td>
@@ -81,18 +76,16 @@
 							<div class="col-small">
 								<!-- Add "update" button/link -->
 								<form action="#" th:action="@{/tickets/showFormForUpdate}" method="POST">
-									<input type="hidden" name="ticketId"
-										th:value="${tempTicket.id}" />
+									<input type="hidden" name="ticketId" th:value="${tempTicket.id}" />
 									<button type="submit" class="btn btn-primary btn-sm ml-4 mr-1">
-									Edit</button>
-								</form>							
+										Edit</button>
+								</form>
 							</div>
-							
+
 							<div class="col-small">
 								<!-- Add "delete" button/link -->
 								<form action="#" th:action="@{/tickets/delete}" method="POST">
-									<input type="hidden" name="ticketId"
-										th:value="${tempTicket.id}" />
+									<input type="hidden" name="ticketId" th:value="${tempTicket.id}" />
 									<button type="submit" class="btn btn-danger btn-sm"
 										onclick="if (!(confirm('Are you sure you want to delete this book?'))) return false">
 										Delete</button>
@@ -102,10 +95,9 @@
 							<div class="col-small">
 								<!-- Add "view" button/link -->
 								<form action="#" th:action="@{/tickets/view}" method="GET">
-									<input type="hidden" name="ticketId"
-										th:value="${tempTicket.id}" />
+									<input type="hidden" name="ticketId" th:value="${tempTicket.id}" />
 									<button type="submit" class="btn btn-info btn-sm ml-1">
-									View</button>
+										View</button>
 								</form>
 							</div>
 

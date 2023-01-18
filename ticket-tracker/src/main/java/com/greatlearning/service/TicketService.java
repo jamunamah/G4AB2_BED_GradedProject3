@@ -10,9 +10,9 @@ public interface TicketService {
 
 	Ticket addTicket(Ticket ticket);
 
-	Ticket findById(int theId);
+	Ticket findById(int id);
 
-	void deleteById(int theId);
+	void deleteById(int id);
 
 	List<Ticket> findAllTickets(String keyword);
 
